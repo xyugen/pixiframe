@@ -14,7 +14,7 @@
     let encryptionPassword = "";
 </script>
 
-<form class="h-full w-7/12 max-md:w-9/12 max-sm:w-11/12" method="post" action="?/upload">
+<form class="h-full w-7/12 max-md:w-9/12 max-sm:w-11/12" method="post" action="?/upload" enctype="multipart/form-data">
     <!-- FILE DROPPER -->
     <div class="h-full w-full flex flex-col items-center justify-center gap-4 {currentStep === 1 ? '' : 'hidden'}">
         <FileDropper />
