@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import FileDropper from "$lib/components/fileDropper.svelte";
 	import { droppedFiles } from "$lib/stores";
 
@@ -8,6 +8,14 @@
     $: {
         hasDroppedFiles = $droppedFiles.length > 0;
     }
+
+    let encryptionOption = "none";
+    $: {
+        encryptionOption;
+    }
+
+    let encryptionPassword: string = "";
+    $: encryptionPassword;
 </script>
 
 <form class="h-full w-full flex justify-center">
@@ -16,7 +24,33 @@
             <FileDropper />
             <input type="button" class="btn btn-neutral w-full" disabled={!hasDroppedFiles} value="Next" on:click={() => currentStep++} />
         {:else if currentStep === 2}
-            <input type="submit" class="btn btn-neutral w-full" value="Submit" />
+            <div class="w-full flex flex-col gap-5">
+                <div class="w-full flex flex-row justify-between">
+                    <h2 class="text-2xl max-sm:text-xl font-semibold">Encryption:</h2>
+                    <div class="form-control flex flex-row">
+                        <label class="label cursor-pointer space-x-2">
+                            <input type="radio" name="encryption" id="encryption-none" class="radio" value="none" checked bind:group={encryptionOption} />
+                            <span class="label-text">None</span>
+                        </label>
+                        <label class="label cursor-pointer space-x-2">
+                            <input type="radio" name="encryption" id="encryption-password" class="radio" value="password" bind:group={encryptionOption} />
+                            <span class="label-text">Password</span>
+                        </label>
+                    </div>
+                </div>
+                {#if encryptionOption === "password"} 
+                    <div class="form-control w-full">
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            class="input input-bordered w-full"
+                            bind:value={encryptionPassword}
+                            required
+                        />
+                    </div>
+                {/if}
+            </div>
+            <input type="submit" class="btn btn-neutral w-full" value="Submit" disabled={encryptionOption === "password" && encryptionPassword.trim() === ""} />
         {/if}
     </form>
 </form>
