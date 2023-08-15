@@ -18,7 +18,6 @@
             droppedFiles.set(Array.from(files));
         }
     }
-    $: console.log($droppedFiles);
 </script>
 
 
@@ -34,7 +33,7 @@
     <input
         type="file"
         id="file-dropper"
-        name="files[]"
+        name="files"
         class="file-input file-input-bordered file-input-neutral max-lg:w-11/12 max-md:file-input-sm"
         accept="image/*,.png,.jpg,.jpeg,.gif"
         on:change={handleFileChange}

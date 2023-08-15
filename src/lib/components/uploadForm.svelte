@@ -13,8 +13,9 @@
     let encryptionPassword = "";
 </script>
 
-<form class="h-full flex flex-col items-center justify-center w-7/12 max-md:w-9/12 max-sm:w-11/12 gap-4">
-    {#if currentStep === 1}
+<form class="h-full w-7/12 max-md:w-9/12 max-sm:w-11/12" method="post" action="?/upload">
+    <!-- FILE DROPPER -->
+    <div class="h-full w-full flex flex-col items-center justify-center gap-4 {currentStep === 1 ? '' : 'hidden'}">
         <FileDropper />
         <input
             type="button"
@@ -23,7 +24,9 @@
             value="Next"
             on:click={() => currentStep++}
         />
-    {:else if currentStep === 2}
+    </div>
+    <!-- UPLOAD -->
+    <div class="h-full w-full flex flex-col items-center justify-center gap-4 {currentStep === 2 ? '' : 'hidden'}">
         <div class="w-full flex flex-col gap-5">
             <div class="w-full flex flex-row justify-between">
                 <h2 class="text-2xl max-sm:text-xl font-semibold">Encryption:</h2>
@@ -79,5 +82,5 @@
                 disabled={encryptionOption === "password" && encryptionPassword.trim() === ""}
             />
         </div>
-    {/if}
+    </div>
 </form>
