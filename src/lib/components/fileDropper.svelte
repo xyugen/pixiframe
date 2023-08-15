@@ -2,15 +2,18 @@
     import { droppedFiles } from "$lib/stores";
 
     const handleFileDrop = (dragEvent: DragEvent) => {
+        dragEvent.preventDefault();
         const files = dragEvent.dataTransfer?.files;
         const fileInput = document.getElementById('file-dropper') as HTMLInputElement;
 
         if (files && fileInput) {
+            fileInput.files = files;
             droppedFiles.set(Array.from(files));
         }
     }
 
     const handleFileChange = (inputEvent: Event) => {
+        inputEvent.preventDefault();
         const files = (inputEvent.target as HTMLInputElement).files;
         const fileInput = document.getElementById('file-dropper') as HTMLInputElement;
 
