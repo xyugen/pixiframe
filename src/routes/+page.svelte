@@ -3,6 +3,9 @@
 	import { droppedFiles } from "$lib/stores";
 
     let steps = 2, currentStep = 1;
+    $: {
+        currentStep = Math.max(1, Math.min(currentStep, steps));
+    }
 
     let hasDroppedFiles = false;
     $: {
@@ -50,7 +53,10 @@
                     </div>
                 {/if}
             </div>
-            <input type="submit" class="btn btn-neutral w-full" value="Submit" disabled={encryptionOption === "password" && encryptionPassword.trim() === ""} />
+            <div class="flex flex-row w-full gap-3">
+                <button class="btn flex-1" on:click={() => {currentStep--; hasDroppedFiles = false}}>Back</button>
+                <input type="submit" class="btn btn-neutral flex-1" value="Submit" disabled={encryptionOption === "password" && encryptionPassword.trim() === ""} />
+            </div>
         {/if}
     </form>
 </form>
