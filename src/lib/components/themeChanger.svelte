@@ -14,9 +14,9 @@
     })
 </script>
 
-<div class="w-fit">
-    <input type="radio" title="Light" name="radio-1" data-theme="light" data-set-theme="light" class="radio" data-act-class="theme-active" />
-    <input type="radio" title="Dark" name="radio-1" data-theme="dark" data-set-theme="dark" class="radio" data-act-class="theme-active" />
-    <input type="radio" title="Retro" name="radio-1" data-theme="retro" data-set-theme="retro" class="radio" data-act-class="theme-active" />
-    <input type="radio" title="Business" name="radio-1" data-theme="business" data-set-theme="business" class="radio" data-act-class="theme-active" />
+<div class="w-fit gap-2 flex items-center">
+    <input type="radio" title="Light" name="radio-1" data-theme="light" data-set-theme="light" class="radio radio-sm" data-act-class="theme-active" />
+    <input type="radio" title="Dark" name="radio-1" data-theme="dark" data-set-theme="dark" class="radio radio-sm" data-act-class="theme-active" />
+    <input type="radio" title="Retro" name="radio-1" data-theme="retro" data-set-theme="retro" class="radio radio-sm" data-act-class="theme-active" />
+    <input type="radio" title="Business" name="radio-1" data-theme="business" data-set-theme="business" class="radio radio-sm" data-act-class="theme-active" />
 </div>

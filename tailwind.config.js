@@ -7,12 +7,12 @@ export default {
 				light: '',
 				dark: '',
 				retro: '',
-				business: '',
+				business: ''
 			}
 		}
 	},
 	daisyui: {
-		themes: ['light', 'dark', 'retro', 'black']
+		themes: ['light', 'dark', 'retro', 'business']
 	},
 	plugins: [require('daisyui')]
 };
