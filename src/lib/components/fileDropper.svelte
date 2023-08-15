@@ -1,18 +1,29 @@
 <script lang="ts">
-    const handleFileDrop = (event: DragEvent) => {
-        event.preventDefault();
+    import { droppedFiles } from "$lib/stores";
 
-        const files = event.dataTransfer?.files;
+    const handleFileDrop = (dragEvent: DragEvent) => {
+        const files = dragEvent.dataTransfer?.files;
         const fileInput = document.getElementById('file-dropper') as HTMLInputElement;
 
         if (files && fileInput) {
-            fileInput.files = files;
+            droppedFiles.set(Array.from(files));
         }
     }
+
+    const handleFileChange = (inputEvent: Event) => {
+        const files = (inputEvent.target as HTMLInputElement).files;
+        const fileInput = document.getElementById('file-dropper') as HTMLInputElement;
+
+        if (files && fileInput) {
+            droppedFiles.set(Array.from(files));
+        }
+    }
+    $: console.log($droppedFiles);
 </script>
 
+
 <div
-    class="h-2/6 w-7/12 max-md:w-9/12 max-sm:w-11/12 border-5 border-dashed border-neutral rounded-2xl flex flex-col justify-center items-center gap-4 p-4"
+    class="h-2/5 max-sm:h-2/6 w-full border-5 border-dashed border-neutral rounded-2xl flex flex-col justify-center items-center gap-4 p-4"
     on:drop={handleFileDrop}
     on:dragover={(event) => event.preventDefault()}
     role="form"
@@ -26,17 +37,8 @@
         name="files[]"
         class="file-input file-input-bordered file-input-neutral max-lg:w-11/12 max-md:file-input-sm"
         accept="image/*,.png,.jpg,.jpeg,.gif"
+        on:change={handleFileChange}
         multiple
     />
 </div>
-
-
-
-<style>
-    @media (max-width: 768px) {
-        .h-2\/6 {
-            height: 50%;
-        }
-    }
-</style>
 
