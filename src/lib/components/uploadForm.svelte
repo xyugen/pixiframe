@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { enhance } from "$app/forms";
     import FileDropper from "$lib/components/fileDropper.svelte";
     import { droppedFiles } from "$lib/stores";
 
@@ -83,6 +84,10 @@
                 type="submit"
                 class="btn btn-neutral flex-1"
                 value="Submit"
+                on:click={() => {
+                    currentStep--;
+                    hasDroppedFiles = false;
+                }}
                 disabled={encryptionOption === "password" && encryptionPassword.trim() === ""}
             />
         </div>
