@@ -28,6 +28,7 @@
     <!-- UPLOAD -->
     <div class="h-full w-full flex flex-col items-center justify-center gap-4 {currentStep === 2 ? '' : 'hidden'}">
         <div class="w-full flex flex-col gap-5">
+            <!-- SELECT ENCRYPTION -->
             <div class="w-full flex flex-row justify-between">
                 <h2 class="text-2xl max-sm:text-xl font-semibold">Encryption:</h2>
                 <div class="form-control flex flex-row">
@@ -56,18 +57,21 @@
                     </label>
                 </div>
             </div>
-            {#if encryptionOption === "password"} 
+            {#if encryptionOption === "password"}
+                <!-- ENCRYPTION PASSWORD -->
                 <div class="form-control w-full">
                     <input
                         type="password"
                         placeholder="Password"
                         class="input input-bordered w-full"
+                        name="password"
                         bind:value={encryptionPassword}
                         required
                     />
                 </div>
             {/if}
         </div>
+        <!-- BACK & SUBMIT -->
         <div class="flex flex-row w-full gap-3">
             <button
                 class="btn flex-1"
