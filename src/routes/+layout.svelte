@@ -26,7 +26,7 @@
 
 <div class="py-4 px-28 max-sm:py-2 max-sm:px-5 max-sm:text-sm h-screen flex flex-col">
     <nav class="flex items-center justify-between">
-        <h1 class="text-lg font-bold">PixFrame</h1>
+        <h1 class="text-lg font-bold"><a href="/">PixiFrame</a></h1>
         <div class="flex">
             <ThemeChanger />
         </div>
