@@ -26,21 +26,27 @@
 
 	export let data: PageData;
 	let passwordMatch = false;
-	let password = data.password;
+	let password = data.password || "";
 	// boolean variable that checks if password is equal to hashed password
 	onMount (async () => {
 		if (data.image?.password && data.password) {
 			passwordMatch = await comparePasswords(data.password, data.image.password)
 		}
 	})
+
+	const checkPassword = async () => {
+		if (data.image?.password && data.password) {
+			passwordMatch = await comparePasswords(password?.toString(), data.image.password)
+		}
+	}
 </script>
 
 <svelte:head>
 	<title>PixiFrame | {data.image?.name}</title>
 </svelte:head>
 
-<div class="w-full h-full flex max-sm:py-14 justify-center text-neutral-content">
-	{#if data.image?.password && passwordMatch || data.image?.password === null}
+<div class="w-full h-full flex max-sm:py-14 justify-center items-center text-neutral-content">
+	{#if passwordMatch || !data.image?.password}
 		<div class="card h-fit w-11/12 bg-neutral shadow-xl break-all">
 			<figure class="px-10 pt-10 max-md:pt-3 max-md:px-3">
 				<img alt={data.image?.description} src={data.image?.storage_url} />
@@ -144,5 +150,26 @@
 				{/each}
 			</div>
 		{/if}
+	{:else}
+	<div class="card h-5/6 w-11/12 bg-neutral shadow-xl break-all flex flex-col justify-center items-center space-y-9">
+		<div class="bg-accent w-48 h-48 max-sm:w-40 max-sm:h-40 rounded-full flex items-center justify-center">
+			<svg class="h-full w-8/12 fill-accent-content" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="48"><path d="M280-240q-100 0-170-70T40-480q0-100 70-170t170-70q78 0 131.5 37.5T491-583h429v206H814v137H628v-137H491q-26 62-79.5 99.5T280-240Zm0-60q71 0 116.5-47t53.5-90h242v137h62v-137h106v-86H450q-8-43-53.5-90T280-660q-75 0-127.5 52.5T100-480q0 75 52.5 127.5T280-300Zm0-112q29 0 48.5-19.5T348-480q0-29-19.5-48.5T280-548q-29 0-48.5 19.5T212-480q0 29 19.5 48.5T280-412Zm0-68Z"/></svg>
+		</div>
+		<h2 class="font-bold text-4xl max-sm:text-3xl text-primary">Protected Image</h2>
+		<div class="w-10/12 flex flex-col">
+			<label for="password" class="text-lg font-medium mb-1">Enter the password:</label>
+			<div class="join">
+				<input
+					type="password"
+					placeholder="Password"
+					name="password"
+					id="password"
+					bind:value={password}
+					class="flex-1 max-sm:w-7/12 input input-bordered bg-neutral-content text-neutral-focus join-item"
+				/>
+				<input type="button" class="btn join-item" value="Unlock" on:click={checkPassword}/>
+			</div>
+		</div>
+	</div>
 	{/if}
 </div>
