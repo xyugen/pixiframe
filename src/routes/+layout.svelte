@@ -31,4 +31,10 @@
     <main class="flex-grow p-8 max-sm:p-0">
         <slot />
     </main>
+	<footer class="footer w-full flex flex-col items-center justify-center">
+		<p class="text-sm flex">
+			Copyright © 2023
+			<a href="https://github.com/xyugen" target="_blank" class="hover:link underline-offset-2">Renz Arias</a>
+		</p>
+	</footer>
 </div>
