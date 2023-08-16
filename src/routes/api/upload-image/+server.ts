@@ -1,12 +1,15 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { generateRandomString, removeFileExtension } from '$lib/utils/helpers';
+import { hashPasswords } from '$lib/utils/passwordHashing';
 
 export const POST: RequestHandler = async ({ request, locals: { supabase } }) => {
     try {
         const formData = await request.formData();
         const file = formData.get('file');
         const fileName = formData.get('name');
+        const password = formData.get('password');
+        const hashedPassword = password ? hashPasswords(password.toString()) : null;
 
         if (!(file instanceof File) || fileName === null) {
             return new Response();
@@ -34,8 +37,9 @@ export const POST: RequestHandler = async ({ request, locals: { supabase } }) =>
         // Insert image to database
         const { error: insertError } = await supabase.from('images').insert({
             name: removeFileExtension(fileName.toString()),
+            password: hashedPassword,
             url: randomUrl,
-            storage_url: imageUrl.data.publicUrl
+            storage_url: imageUrl.data.publicUrl,
         });
 
         if (insertError) {

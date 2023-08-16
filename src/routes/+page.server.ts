@@ -27,6 +27,7 @@ export const actions: Actions = {
             // Upload file
             const formData = await handleFormData(compressedBuffer, mimeType);
             formData.append('name', file.name);
+            if (password) formData.append('password', password.toString());
             const response = await fetch("/api/upload-image", {
                 method: "POST",
                 body: formData,
