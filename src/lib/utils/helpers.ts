@@ -2,6 +2,14 @@ export const getFileExtention = (filename: string) => {
     return filename.split('.').pop() || '';
 }
 
+export const removeFileExtension = (filename: string) => {
+    const lastDotIndex = filename.lastIndexOf('.');
+    if (lastDotIndex !== -1) {
+        return filename.substring(0, lastDotIndex);
+    }
+    return filename;
+}
+
 export const getFileMimeType = (extension: string) => {
     const mimeTypes: Record<string, string> = {
         'jpg': 'image/jpeg',

@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { generateRandomString, getFileExtention } from '$lib/utils/helpers';
+import { generateRandomString, getFileExtention, removeFileExtension } from '$lib/utils/helpers';
 
 export const POST: RequestHandler = async ({ request, locals: { supabase } }) => {
     try {
@@ -12,12 +12,33 @@ export const POST: RequestHandler = async ({ request, locals: { supabase } }) =>
             return new Response();
         }
 
-        // Generate a random filename to avoid collisions
-        const randomDirectory: string = generateRandomString(6);
-
-        const { data, error } = await supabase.storage.from(`images/uploads/${randomDirectory}/`).upload(fileName.toString(), file);
-
+        // Generate random directory
+        const randomDirectory = generateRandomString(6);
+        // Upload file
+        const { data, error } = await supabase.storage
+            .from(`images/uploads/${randomDirectory}/`)
+            .upload(fileName.toString(), file);
         if (error) {
+            return json({
+                status: 500,
+                body: json({ error: 'Image upload failed' })
+            });
+        }
+        
+        // Get image url
+        const imageUrl = supabase.storage
+            .from(`images/uploads/${randomDirectory}/`)
+            .getPublicUrl(fileName.toString());
+        // Generate random url
+        const randomUrl = generateRandomString(7);
+        // Insert image to database
+        const { error: insertError } = await supabase.from('images').insert({
+            name: removeFileExtension(fileName.toString()),
+            url: randomUrl,
+            storage_url: imageUrl.data.publicUrl
+        });
+
+        if (insertError) {
             return json({
                 status: 500,
                 body: json({ error: 'Image upload failed' })
