@@ -57,9 +57,9 @@
 	<title>PixiFrame | {toTitleCase(data.image?.name)}</title>
 </svelte:head>
 
-<div class="w-full h-full flex max-sm:py-14 justify-center items-center text-neutral-content">
+<div class="w-full h-full flex max-sm:py-5 justify-center items-center text-neutral-content">
 	{#if passwordMatch || !data.image?.password}
-		<div class="card h-fit w-11/12 bg-neutral shadow-xl break-all">
+		<div class="card h-fit w-11/12 max-sm:w-full bg-neutral shadow-xl break-all">
 			<figure class="px-10 pt-10 max-md:pt-3 max-md:px-3">
 				<img alt={data.image?.description} src={data.image?.storage_url} />
 			</figure>
