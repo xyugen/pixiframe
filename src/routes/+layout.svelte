@@ -1,6 +1,7 @@
 <script lang="ts">
     import '../app.css';
     import ThemeChanger from '$lib/components/themeChanger.svelte';
+	import PixiframeLogo from '$lib/assets/pixiframe_logo.webp'
 	import { invalidate } from '$app/navigation'
 	import { onMount } from 'svelte'
 
@@ -24,9 +25,9 @@
     <title>PixiFrame</title>
 </svelte:head>
 
-<div class="py-4 px-28 max-sm:py-2 max-sm:px-5 max-sm:text-sm h-screen flex flex-col">
+<div class="py-4 px-28 font-poppins max-sm:py-2 max-sm:px-5 max-sm:text-sm h-screen flex flex-col">
     <nav class="flex items-center justify-between">
-        <h1 class="text-lg font-bold"><a href="/">PixiFrame</a></h1>
+        <h1 class="text-lg"><a class="flex flex-row items-center font-popo" href="/"><img class="w-12" src={PixiframeLogo} alt="logo"><span class="text-primary-focus">Pixi Frame</span></a></h1>
         <div class="flex">
             <ThemeChanger />
         </div>

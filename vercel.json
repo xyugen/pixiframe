@@ -1,0 +1,5 @@
+{
+  "version": 2,
+  "builds": [{ "src": "package.json", "use": "@sveltejs/adapter-vercel" }],
+  "routes": [{ "src": "/(.*?)", "dest": "/index.html" }]
+}
