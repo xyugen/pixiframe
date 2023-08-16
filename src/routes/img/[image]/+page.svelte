@@ -65,7 +65,6 @@
             {/if}
 			<div class="divider before:bg-neutral-focus after:bg-neutral-focus" />
 			<h3 class="text-secondary font-medium">Embed links</h3>
-            <!-- TODO: -->
 			<div class="form-control w-full">
 				<label for="sharelink" class="label w-fit">
 					<span class="label-text text-neutral-content">Share Link</span>
