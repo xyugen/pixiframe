@@ -1,22 +1,24 @@
-<script>
-	import FileDropper from "$lib/components/fileDropper.svelte";
-	import { droppedFiles } from "$lib/stores";
+<script lang="ts">
+	import UploadForm from "$lib/components/uploadForm.svelte";
+    import type { ActionData } from './$types';
 
-    let steps = 2, currentStep = 1;
+    let form: ActionData;
 
-    let hasDroppedFiles = false;
-    $: {
-        hasDroppedFiles = $droppedFiles.length > 0;
+    const closeToast = (event: Event) => {
+        const button = event.target as HTMLButtonElement;
+        button.parentElement?.parentElement?.remove();
     }
 </script>
-
-<form class="h-full w-full flex justify-center">
-    <form class="h-full flex flex-col items-center justify-center w-7/12 max-md:w-9/12 max-sm:w-11/12 gap-4">
-        {#if currentStep === 1}
-            <FileDropper />
-            <input type="button" class="btn btn-neutral w-full" disabled={!hasDroppedFiles} value="Next" on:click={() => currentStep++} />
-        {:else if currentStep === 2}
-            <input type="submit" class="btn btn-neutral w-full" value="Submit" />
-        {/if}
-    </form>
-</form>
+<div class="h-full w-full flex justify-center">
+    <UploadForm />
+    {#if form?.error}
+        <div class="toast toast-top toast-center">
+            <div class="alert alert-error relative">
+                <button class="absolute right-1 hover:bg-primary h-5 w-5 rounded-full top-1 flex items-center justify-center" on:click={closeToast}>
+                    <svg class="w-3 fill-neutral" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="m249-183-66-66 231-231-231-231 66-66 231 231 231-231 66 66-231 231 231 231-66 66-231-231-231 231Z"/></svg>
+                </button>
+                <span>{form.error}</span>
+            </div>
+        </div>
+    {/if}
+</div>

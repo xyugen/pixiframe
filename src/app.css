@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+::selection {
+    @apply bg-accent;
+    @apply text-accent-content;
+}
+
 * {
     box-sizing: border-box;
 }

@@ -1,38 +1,46 @@
-# create-svelte
+# PixiFrame
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+PixiFrame is a stunning website crafted with SvelteKit and backed by Supabase. It empowers you to upload, share, and secure images with ease. Control access by setting a passphrase for added privacy. PixiFrame supports jpg/jpeg, png, and gif files, with more formats coming soon.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Upload and share pictures effortlessly.
+- Enhance privacy by setting passphrases for shared images.
+- Aesthetic design and user-friendly interface.
+- Built for performance using SvelteKit and Supabase.
+- Support for popular image file formats: jpg/jpeg, png, and gif.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Getting Started
 
-# create a new project in my-app
-npm create svelte@latest my-app
+To get started with PixiFrame, follow these steps:
+
+1. Clone the repository:
+```sh
+git clone https://github.com/xyugen/pixiframe.git
 ```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
+2. Install dependencies
+```sh
+cd pixiframe
+npm install (or pnpm install)
+```
+3. Configure your Supabase credentials:
+- Create a `.env` file in the project root.
+- Add your Supabase API URL and API Key to the `.env` file:
+```sh
+PUBLIC_SUPABASE_URL=<your-supabase-api-url>
+PUBLIC_SUPABASE_ANON_KEY=<your-supabase-api-key>
+```
+3. Start the development server
+```sh
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
+4. Access the website in your browser:
+Open your browser and navigate to `http://localhost:3000`.
 
-## Building
+## Contributing
 
-To create a production version of your app:
+Contributions to PixiFrame are welcome! If you find any issues or want to add new features, feel free to submit pull requests. Please make sure to follow the code style and conventions.
 
-```bash
-npm run build
-```
+## License
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+PixiFrame is open source and released under the [MIT License](LICENSE)
