@@ -21,10 +21,6 @@
 	})
 </script>
 
-<svelte:head>
-    <title>PixiFrame</title>
-</svelte:head>
-
 <div class="py-4 px-28 font-poppins max-sm:py-2 max-sm:px-5 max-sm:text-sm h-screen flex flex-col">
     <nav class="flex items-center justify-between">
         <h1 class="text-lg"><a class="flex flex-row items-center font-popo" href="/"><img class="w-12" src={PixiframeLogo} alt="logo"><span class="text-primary-focus">Pixi Frame</span></a></h1>

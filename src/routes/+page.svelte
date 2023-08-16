@@ -9,6 +9,11 @@
         button.parentElement?.parentElement?.remove();
     }
 </script>
+
+<svelte:head>
+    <title>PixiFrame</title>
+</svelte:head>
+
 <div class="h-full w-full flex justify-center">
     <UploadForm />
     {#if form?.error}

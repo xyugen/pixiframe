@@ -65,3 +65,18 @@ export const escapeFileName = (fileName: string) => {
     // Replace any characters that are not alphanumeric, underscore, or hyphen with an empty string
     return fileName.replace(/[^\w-]/g, '');
 }
+
+export const toTitleCase = (input: string): string => {
+    return input
+        .split(/\s+/)
+        .map(word => {
+            if (word.match(/^[A-Z]+$/)) { // Handle acronyms
+                return word;
+            } else {
+                const firstChar = word.charAt(0).toUpperCase();
+                const rest = word.slice(1).toLowerCase();
+                return firstChar + rest;
+            }
+        })
+        .join(' ');
+}

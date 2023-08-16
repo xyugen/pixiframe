@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { page } from '$app/stores';
-	import { getTimeAgo } from '$lib/utils/helpers';
+	import { getTimeAgo, toTitleCase } from '$lib/utils/helpers';
 	import { comparePasswords } from '$lib/utils/passwordHashing';
 	import { onMount } from 'svelte';
 
@@ -54,7 +54,7 @@
 </script>
 
 <svelte:head>
-	<title>PixiFrame | {data.image?.name}</title>
+	<title>PixiFrame | {toTitleCase(data.image?.name)}</title>
 </svelte:head>
 
 <div class="w-full h-full flex max-sm:py-14 justify-center items-center text-neutral-content">
@@ -90,7 +90,7 @@
 					class="card-title text-primary font-bold text-3xl max-md:text-2xl max-sm:text-xl capitalize"
 				>
 					<!-- Make this titlecase -->
-					{decodeURIComponent(data.image?.name)}
+					{toTitleCase(decodeURIComponent(data.image?.name))}
 				</h2>
 				<small class="text-sm italic">Uploaded {getTimeAgo(new Date(data.image?.created_at))}</small>
 				{#if data.image?.description}
