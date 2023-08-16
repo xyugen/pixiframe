@@ -39,6 +39,7 @@ export const POST: RequestHandler = async ({ request, locals: { supabase } }) =>
             name: removeFileExtension(fileName.toString()),
             password: hashedPassword,
             url: randomUrl,
+            storage_key: randomDirectory,
             storage_url: imageUrl.data.publicUrl,
         });
 

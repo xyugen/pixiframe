@@ -23,7 +23,6 @@ export const POST: RequestHandler = async ({ request, locals: { supabase }}) => 
             });
         }
         
-        console.log(data[0]);
         return json({
             status: 200,
             body: data[0],
