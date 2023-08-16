@@ -7,6 +7,8 @@ export const actions: Actions = {
     upload: async ({ request, fetch }) => {
         const formData = await request.formData();
 
+        let password;
+
         const encryptionOption = formData.get("encryption") as string;
         const password = encryptionOption === "password" ? formData.get("password") as string : undefined;
 
