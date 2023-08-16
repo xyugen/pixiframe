@@ -1,4 +1,5 @@
-import { read } from 'jimp';
+import pkg from 'jimp';
+const { read } = pkg;
 
 export async function compressImage(file: ArrayBuffer, fileExtension: string): Promise<Buffer> {
     switch (fileExtension.toLowerCase()) {
