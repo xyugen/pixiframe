@@ -35,9 +35,12 @@ export const actions: Actions = {
                 body: formData,
             })
 
+            const { body: { redirectUrl } } = await response.json();
+            console.log(redirectUrl);
+
             if (response.ok) {
                 console.log("File uploaded successfully");
-                throw redirect(303, '/');
+                throw redirect(303, redirectUrl);
             } else {
                 console.log("File upload failed");
                 return {

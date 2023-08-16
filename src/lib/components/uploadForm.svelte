@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { enhance } from "$app/forms";
     import FileDropper from "$lib/components/fileDropper.svelte";
     import { droppedFiles } from "$lib/stores";
 

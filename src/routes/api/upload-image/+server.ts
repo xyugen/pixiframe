@@ -52,10 +52,11 @@ export const POST: RequestHandler = async ({ request, locals: { supabase } }) =>
 
         return json({
             status: 200,
-            body: json({
+            body: {
                 data: data,
-                message: 'Image uploaded successfully!'
-            })
+                message: 'Image uploaded successfully!',
+                redirectUrl: `/img/${randomUrl}`,
+            }
         });
     } catch (error) {
         return json({
