@@ -1,5 +1,6 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
+import { generateRandomString, getFileExtention } from '$lib/utils/helpers';
 
 export const POST: RequestHandler = async ({ request, locals: { supabase } }) => {
     try {
@@ -11,7 +12,10 @@ export const POST: RequestHandler = async ({ request, locals: { supabase } }) =>
             return new Response();
         }
 
-        const { data, error } = await supabase.storage.from('images/uploads').upload(fileName.toString(), file);
+        // Generate a random filename to avoid collisions
+        const randomDirectory: string = generateRandomString(6);
+
+        const { data, error } = await supabase.storage.from(`images/uploads/${randomDirectory}/`).upload(fileName.toString(), file);
 
         if (error) {
             return json({
