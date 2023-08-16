@@ -1,7 +1,7 @@
 import { supabaseKey, supabaseUrl } from '$lib/utils/constants.js'
 import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit'
 
-export const handle = async ({ event, resolve}) => {
+export const handle = async ({ event, resolve }) => {
     event.locals.supabase = createSupabaseServerClient({
         supabaseKey: supabaseKey,
         supabaseUrl: supabaseUrl,
