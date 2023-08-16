@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { generateRandomString, getFileExtention, removeFileExtension } from '$lib/utils/helpers';
+import { generateRandomString, removeFileExtension } from '$lib/utils/helpers';
 
 export const POST: RequestHandler = async ({ request, locals: { supabase } }) => {
     try {
