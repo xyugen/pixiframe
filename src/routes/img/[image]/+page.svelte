@@ -90,7 +90,7 @@
 					class="card-title text-primary font-bold text-3xl max-md:text-2xl max-sm:text-xl capitalize"
 				>
 					<!-- Make this titlecase -->
-					{data.image?.name}
+					{decodeURIComponent(data.image?.name)}
 				</h2>
 				<small class="text-sm italic">Uploaded {getTimeAgo(new Date(data.image?.created_at))}</small>
 				{#if data.image?.description}

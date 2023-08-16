@@ -75,7 +75,7 @@
         <div class="flex flex-row w-full gap-3">
             <button
                 class="btn flex-1"
-                on:click={() => {currentStep--; hasDroppedFiles = false}}
+                on:click={(event) => {event.preventDefault(), currentStep--; hasDroppedFiles = false}}
             >
                 Back
             </button>
