@@ -1,4 +1,4 @@
-import sharp from 'sharp';
+import { read } from 'jimp';
 
 export async function compressImage(file: ArrayBuffer, fileExtension: string): Promise<Buffer> {
     switch (fileExtension.toLowerCase()) {
@@ -15,35 +15,20 @@ export async function compressImage(file: ArrayBuffer, fileExtension: string): P
 }
 
 async function compressJpeg(file: ArrayBuffer, quality: number): Promise<Buffer> {
-    // Define compression options
-    const compressionOptions = {
-        quality: quality, // Adjust the quality as needed (0-100)
-    };
+    const image = await read(Buffer.from(file));
+    image.quality(quality);
 
-    const compressedImageBuffer = await sharp(file)
-        .jpeg(compressionOptions)
-        .toBuffer();
-        
-    return compressedImageBuffer
+    return image.getBufferAsync(image.getMIME());
 }
 
 async function compressPng(file: ArrayBuffer, compressionLevel: number): Promise<Buffer> {
-    // Define compression options
-    const compressionOptions = {
-        compressionLevel: compressionLevel, // Adjust the quality as needed [0(fastest, larger)-9(slowest, smallest)]
-    };
+    const image = await read(Buffer.from(file));
+    image.deflateLevel(compressionLevel);
 
-    const compressedImageBuffer = await sharp(file)
-        .png(compressionOptions)
-        .toBuffer();
-
-    return compressedImageBuffer;
+    return image.getBufferAsync(image.getMIME());
 }
 
 async function compressGif(file: ArrayBuffer): Promise<Buffer> {
-    const compressedImageBuffer = await sharp(file)
-        .gif()
-        .toBuffer();
-
-    return compressedImageBuffer;
+    const image = await read(Buffer.from(file));
+    return image.getBufferAsync(image.getMIME());
 }
