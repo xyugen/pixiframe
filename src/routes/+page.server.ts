@@ -2,6 +2,7 @@ import type { Actions } from "./$types";
 import fs from 'fs';
 import { compressImage } from "$lib/utils/compression";
 import { getFileExtention, getFileMimeType } from "$lib/utils/helpers";
+import { json, redirect } from "@sveltejs/kit";
 
 export const actions: Actions = {
     upload: async ({ request, fetch }) => {
@@ -34,8 +35,12 @@ export const actions: Actions = {
 
             if (response.ok) {
                 console.log("File uploaded successfully");
+                throw redirect(303, '/');
             } else {
                 console.log("File upload failed");
+                return {
+                    error: "File upload failed",
+                }
             }
         }
     }
