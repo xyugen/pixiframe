@@ -36,7 +36,7 @@ export const POST: RequestHandler = async ({ request, locals: { supabase } }) =>
         const randomUrl = generateRandomString(7);
         // Insert image to database
         const { error: insertError } = await supabase.from('images').insert({
-            name: removeFileExtension(fileName.toString()),
+            name: encodeURIComponent(removeFileExtension(fileName.toString())),
             password: hashedPassword,
             url: randomUrl,
             storage_key: randomDirectory,

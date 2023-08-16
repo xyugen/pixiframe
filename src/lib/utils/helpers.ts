@@ -60,3 +60,8 @@ export const getTimeAgo = (date: Date) => {
         return `${seconds} second${seconds !== 1 ? 's' : ''} ago`;
     }
 }
+
+export const escapeFileName = (fileName: string) => {
+    // Replace any characters that are not alphanumeric, underscore, or hyphen with an empty string
+    return fileName.replace(/[^\w-]/g, '');
+}

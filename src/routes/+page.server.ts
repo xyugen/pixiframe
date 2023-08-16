@@ -1,6 +1,6 @@
 import type { Actions } from "./$types";
 import { compressImage } from "$lib/utils/compression";
-import { getFileExtention, getFileMimeType } from "$lib/utils/helpers";
+import { escapeFileName, getFileExtention, getFileMimeType } from "$lib/utils/helpers";
 import { redirect } from "@sveltejs/kit";
 
 export const actions: Actions = {
@@ -35,7 +35,7 @@ export const actions: Actions = {
 
             const { body: { redirectUrl } } = await response.json();
 
-            const _redirectUrl = password ? `${redirectUrl}?password=${password.toString()}` : redirectUrl;
+            const _redirectUrl = password ? `${redirectUrl}?password=${encodeURIComponent(password.toString())}` : redirectUrl;
 
             if (response.ok) {
                 console.log("File uploaded successfully");
