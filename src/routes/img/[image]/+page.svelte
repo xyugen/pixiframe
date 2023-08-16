@@ -34,9 +34,21 @@
 		}
 	})
 
+	let wrongPassword = 0;
 	const checkPassword = async () => {
 		if (data.image?.password && password) {
 			passwordMatch = await comparePasswords(password?.toString(), data.image.password)
+		} else {
+			wrongPassword++;
+			setTimeout(() => {
+				wrongPassword--;
+			}, 3000);
+		}
+	}
+
+	const invokePassCheck =async (event: KeyboardEvent) => {
+		if (event.key === "Enter") {
+			await checkPassword();
 		}
 	}
 </script>
@@ -151,11 +163,11 @@
 			</div>
 		{/if}
 	{:else}
-	<div class="card h-5/6 w-11/12 bg-neutral shadow-xl break-all flex flex-col justify-center items-center space-y-9">
-		<div class="bg-accent w-48 h-48 max-sm:w-40 max-sm:h-40 rounded-full flex items-center justify-center">
-			<svg class="h-full w-8/12 fill-accent-content" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="48"><path d="M280-240q-100 0-170-70T40-480q0-100 70-170t170-70q78 0 131.5 37.5T491-583h429v206H814v137H628v-137H491q-26 62-79.5 99.5T280-240Zm0-60q71 0 116.5-47t53.5-90h242v137h62v-137h106v-86H450q-8-43-53.5-90T280-660q-75 0-127.5 52.5T100-480q0 75 52.5 127.5T280-300Zm0-112q29 0 48.5-19.5T348-480q0-29-19.5-48.5T280-548q-29 0-48.5 19.5T212-480q0 29 19.5 48.5T280-412Zm0-68Z"/></svg>
+	<div class="card md:p-2 h-5/6 w-11/12 bg-neutral shadow-xl break-all flex flex-col justify-center items-center space-y-9">
+		<div class="bg-accent w-48 h-48 max-md:w-24 max-md:h-24 max-sm:w-20 max-sm:h-20 rounded-full flex items-center justify-center">
+			<svg class="h-full w-8/12 max-md:w-6/12 max-sm:w-5/12 fill-accent-content" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="48"><path d="M280-240q-100 0-170-70T40-480q0-100 70-170t170-70q78 0 131.5 37.5T491-583h429v206H814v137H628v-137H491q-26 62-79.5 99.5T280-240Zm0-60q71 0 116.5-47t53.5-90h242v137h62v-137h106v-86H450q-8-43-53.5-90T280-660q-75 0-127.5 52.5T100-480q0 75 52.5 127.5T280-300Zm0-112q29 0 48.5-19.5T348-480q0-29-19.5-48.5T280-548q-29 0-48.5 19.5T212-480q0 29 19.5 48.5T280-412Zm0-68Z"/></svg>
 		</div>
-		<h2 class="font-bold text-4xl max-sm:text-3xl text-primary">Protected Image</h2>
+		<h2 class="font-bold text-4xl max-sm:text-2xl text-primary">Protected Image</h2>
 		<div class="w-10/12 flex flex-col">
 			<label for="password" class="text-lg font-medium mb-1">Enter the password:</label>
 			<div class="join">
@@ -164,6 +176,7 @@
 					placeholder="Password"
 					name="password"
 					id="password"
+					on:keydown={invokePassCheck}
 					bind:value={password}
 					class="flex-1 max-sm:w-7/12 input input-bordered bg-neutral-content text-neutral-focus join-item"
 				/>
@@ -171,5 +184,14 @@
 			</div>
 		</div>
 	</div>
+	{#if wrongPassword > 0}
+		<div class="toast">
+		{#each Array.from({ length: wrongPassword }) as _, i (i)}
+				<div class="alert alert-error">
+					<span>Wrong password!</span>
+				</div>
+		{/each}
+		</div>
+	{/if}
 	{/if}
 </div>
