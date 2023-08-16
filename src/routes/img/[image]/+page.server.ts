@@ -1,8 +1,9 @@
 import { error, redirect } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "./$types";
 
-export const load: PageServerLoad = async ({ params, fetch }) => {
+export const load: PageServerLoad = async ({ url, params, fetch }) => {
     const image = params.image;
+    const password: string | null = url.searchParams.get('password');
 
     const response = await fetch(`/api/retrieve-image`, {
         method: "POST",
@@ -15,7 +16,8 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
         throw error(404, "Image not found");
     }
     return {
-        image: imageData
+        image: imageData,
+        password: password
     }
 };
 
