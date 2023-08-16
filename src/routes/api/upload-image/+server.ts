@@ -9,7 +9,7 @@ export const POST: RequestHandler = async ({ request, locals: { supabase } }) =>
         const file = formData.get('file');
         const fileName = formData.get('name');
         const password = formData.get('password');
-        const hashedPassword = password ? hashPasswords(password.toString()) : null;
+        const hashedPassword = password ? await hashPasswords(password.toString()) : null;
 
         if (!(file instanceof File) || fileName === null) {
             return new Response();

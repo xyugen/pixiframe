@@ -34,11 +34,12 @@ export const actions: Actions = {
             })
 
             const { body: { redirectUrl } } = await response.json();
-            console.log(redirectUrl);
+
+            const _redirectUrl = password ? `${redirectUrl}?password=${password.toString()}` : redirectUrl;
 
             if (response.ok) {
                 console.log("File uploaded successfully");
-                throw redirect(303, redirectUrl);
+                throw redirect(303, _redirectUrl);
             } else {
                 console.log("File upload failed");
                 return {

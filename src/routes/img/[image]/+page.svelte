@@ -35,7 +35,7 @@
 	})
 
 	const checkPassword = async () => {
-		if (data.image?.password && data.password) {
+		if (data.image?.password && password) {
 			passwordMatch = await comparePasswords(password?.toString(), data.image.password)
 		}
 	}
@@ -167,7 +167,7 @@
 					bind:value={password}
 					class="flex-1 max-sm:w-7/12 input input-bordered bg-neutral-content text-neutral-focus join-item"
 				/>
-				<input type="button" class="btn join-item" value="Unlock" on:click={checkPassword}/>
+				<button class="btn join-item" on:click={checkPassword}>Unlock</button>
 			</div>
 		</div>
 	</div>
